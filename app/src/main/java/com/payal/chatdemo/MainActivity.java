@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.inscripts.cometchat.sdk.CometChat;
+
 /**
  * Created by payal on 13/4/16.
  */
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
+    CometChat cometChat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menu.add("Users");
         menu.add("Chatrooms");
         menu.add("Logout");
+
+        cometChat = CometChat.getInstance(getApplicationContext(),"10415x77177883eedf5255554e825180e563c1");
     }
 
     @Override
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
 
             /*setTitle(item.getTitle());
             getSupportFragmentManager().beginTransaction()
