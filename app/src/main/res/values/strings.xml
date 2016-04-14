@@ -3,4 +3,9 @@
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+
+    <string name="str_email">User Name</string>
+    <string name="str_password">Password</string>
+    <string name="str_login">Login</string>
+
 </resources>

@@ -9,4 +9,13 @@ public class ChatApplication extends Application {
 
 
 
+    public void onCreate() {
+        super.onCreate();
+
+        ChatVolley.init(this);
+
+
+    }
+
+
 }
