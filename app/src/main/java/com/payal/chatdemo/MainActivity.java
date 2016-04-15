@@ -15,12 +15,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.inscripts.callbacks.Callbacks;
 import com.inscripts.callbacks.SubscribeCallbacks;
 import com.inscripts.callbacks.SubscribeChatroomCallbacks;
 import com.inscripts.cometchat.sdk.CometChat;
 import com.inscripts.cometchat.sdk.CometChatroom;
+import com.payal.chatdemo.fragments.OnlineUsersFragment;
 import com.payal.chatdemo.fragments.ProfileFragment;
+import com.payal.chatdemo.parser.OnlineUsersDeserializer;
+import com.payal.chatdemo.parser.OnlineUsersList;
 
 import org.json.JSONObject;
 
@@ -149,12 +155,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             cometChat.getOnlineUsers(new Callbacks() {
                 @Override
                 public void successCallback(JSONObject jsonObject) {
-                    Log.d("got successCallback",jsonObject+"");
+                    Log.d("getOnlineUsers su ", jsonObject + "");
+
+                    GsonBuilder builder = new GsonBuilder();
+                    Object o = builder.create().fromJson(jsonObject.toString(), Object.class);
+
+                   // Type typeCategoryItemDetails = new TypeToken<ArrayList<OnlineUsers>>() {
+                     //   }.getType();
+
+                  //  new Gson().fromJson(jsonObject.toString(), typeCategoryItemDetails);
+                    pro.dismiss();
+
+
+
+                    builder.registerTypeAdapter(OnlineUsersList.class, new OnlineUsersDeserializer());
+                    Gson gson = builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+                    OnlineUsersList list = gson.fromJson(jsonObject.toString(), OnlineUsersList.class);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, OnlineUsersFragment.newInstance(list)).commit();
                 }
 
                 @Override
                 public void failCallback(JSONObject jsonObject) {
-                    Log.d("got failure",jsonObject+"");
+                    Log.d("getOnlineUsers fa",jsonObject+"");
                 }
             });
 

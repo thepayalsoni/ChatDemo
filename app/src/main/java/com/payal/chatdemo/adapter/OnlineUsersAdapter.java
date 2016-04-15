@@ -8,18 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.payal.chatdemo.R;
+import com.payal.chatdemo.parser.OnlineUsers;
+
+import java.util.List;
 
 /**
  * Created by payal on 21/3/16.
  */
-public class ChatroomAdapter extends RecyclerView.Adapter<ChatroomAdapter.ViewHolder> {
+public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.ViewHolder> {
 
     LayoutInflater inflater;
     Context context;
+    List<OnlineUsers> onlineUsersArrayList;
 
-
-    public ChatroomAdapter(Context context) {
+    public OnlineUsersAdapter(Context context, List<OnlineUsers> onlineUsersArrayList) {
         this.context = context;
+        this.onlineUsersArrayList = onlineUsersArrayList;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
@@ -29,13 +33,13 @@ public class ChatroomAdapter extends RecyclerView.Adapter<ChatroomAdapter.ViewHo
     @Override
     public long getItemId(int position) {
 
-        return 0;
+        return onlineUsersArrayList==null?0:onlineUsersArrayList.size();
     }
 
     @Override
     public int getItemCount() {
 
-        return  0;
+        return  onlineUsersArrayList != null ? onlineUsersArrayList.size() : 0;
     }
 
     @SuppressWarnings("deprecation")
@@ -45,7 +49,7 @@ public class ChatroomAdapter extends RecyclerView.Adapter<ChatroomAdapter.ViewHo
 
 
 
-
+            holder.tvChatRoom.setText(onlineUsersArrayList.get(position).getN());
 
 
     }
