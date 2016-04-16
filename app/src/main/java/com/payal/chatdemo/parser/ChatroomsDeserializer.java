@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class OnlineUsersDeserializer implements JsonDeserializer<OnlineUsersList> {
+public class ChatroomsDeserializer implements JsonDeserializer<ChatroomsList> {
 
     @Override
-    public OnlineUsersList deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public ChatroomsList deserialize(JsonElement element, Type type, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = element.getAsJsonObject();
-        List<OnlineUsers> onlineUsersList = new ArrayList<OnlineUsers>();
+        List<Chatrooms> chatrooms = new ArrayList<Chatrooms>();
         for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-            OnlineUsers users = context.deserialize(entry.getValue(), OnlineUsers.class);
-            onlineUsersList.add(users);
+            Chatrooms chatroom = context.deserialize(entry.getValue(), Chatrooms.class);
+            chatrooms.add(chatroom);
         }
-        return new OnlineUsersList(onlineUsersList);
+        return new ChatroomsList(chatrooms);
     }
 
 }

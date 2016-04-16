@@ -8,22 +8,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.payal.chatdemo.R;
-import com.payal.chatdemo.parser.OnlineUsers;
+import com.payal.chatdemo.parser.Chatrooms;
 
 import java.util.List;
 
 /**
  * Created by payal on 21/3/16.
  */
-public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.ViewHolder> {
+public class ChatroomsAdapter extends RecyclerView.Adapter<ChatroomsAdapter.ViewHolder> {
 
     LayoutInflater inflater;
     Context context;
-    List<OnlineUsers> onlineUsersArrayList;
+    List<Chatrooms> chatroomsList;
 
-    public OnlineUsersAdapter(Context context, List<OnlineUsers> onlineUsersArrayList) {
+    public ChatroomsAdapter(Context context, List<Chatrooms> onlineUsersArrayList) {
         this.context = context;
-        this.onlineUsersArrayList = onlineUsersArrayList;
+        this.chatroomsList = onlineUsersArrayList;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
@@ -33,13 +33,13 @@ public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.
     @Override
     public long getItemId(int position) {
 
-        return onlineUsersArrayList==null?0:onlineUsersArrayList.size();
+        return chatroomsList ==null?0: chatroomsList.size();
     }
 
     @Override
     public int getItemCount() {
 
-        return  onlineUsersArrayList != null ? onlineUsersArrayList.size() : 0;
+        return  chatroomsList != null ? chatroomsList.size() : 0;
     }
 
     @SuppressWarnings("deprecation")
@@ -49,9 +49,7 @@ public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.
 
 
 
-            holder.tvChatRoom.setText(onlineUsersArrayList.get(position).getN());
-
-
+            holder.tvChatRoom.setText(chatroomsList.get(position).getName());
 
 
     }
@@ -67,9 +65,8 @@ public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.
 
     }
 
-    OnItemClickListener mItemClickListener;
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
 
         TextView tvChatRoom;
 
@@ -78,27 +75,14 @@ public class OnlineUsersAdapter extends RecyclerView.Adapter<OnlineUsersAdapter.
             super(itemView);
             tvChatRoom = (TextView) itemView.findViewById(R.id.tv_chatroom);
 
-            itemView.setOnClickListener(this);
+
         }
 
-        @Override
-        public void onClick(View v) {
 
-
-            if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getPosition());
-            }
-        }
 
     }
 
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
-    }
 
-    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
-        this.mItemClickListener = mItemClickListener;
-    }
 
 
 }

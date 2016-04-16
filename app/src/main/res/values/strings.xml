@@ -8,4 +8,7 @@
     <string name="str_password">Password</string>
     <string name="str_login">Login</string>
 
+    <string name="str_name">Name</string>
+    <string name="str_type">Chatroom Type</string>
+    <string name="str_create_chatroom">Create Chatroom</string>
 </resources>
